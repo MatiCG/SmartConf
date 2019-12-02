@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SmartConf</string>
+
+    <!-- Empty Activity -->
+    <string name="empty_layout_textmsg">This page doesn\'t exist or is in construction…</string>
+    <string name="toast_notcongifured">Not configured !</string>
 </resources>
