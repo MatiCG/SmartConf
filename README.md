@@ -40,7 +40,7 @@ Start working and committing locally:
 [feature/my-feature] $ git status
 [feature/my-feature] $ git commit -a -m “great commit description, blah blah”
 ```
-##Commits should not be one liners!
+## Commits should not be one liners!
 ```
 [ADD] I added this
 - it adds this stuff
