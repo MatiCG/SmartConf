@@ -1,0 +1,33 @@
+version: '3'
+services:
+  poll:
+    build:
+      context: ./IA
+      dockerfile: Dockerfile
+    ports:
+      - 5000:80
+    networks:
+      - ia-tier
+    restart: always
+    environment:
+      - HOST=redis
+
+  db:
+    image: postgres:10.3
+    networks:
+      - ia-tier
+    volumes:
+       - ./schema.sql:/docker-entrypoint-init.d/schema.sql
+       - .:/docker-entrypoint-initdb.d
+       - db-data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=db
+
+volumes:
+  db-data:
+
+networks:
+  ia-tier:
