@@ -15,6 +15,6 @@ class HomeFragment: BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         list.layoutManager = LinearLayoutManager(context)
-        list.adapter = HomeAdapter(listOf<String>("Test1", "Test2", "Test3"))
+        list.adapter = HomeAdapter(listOf<String>("Test1", "Test2", "Test3"), this)
     }
 }

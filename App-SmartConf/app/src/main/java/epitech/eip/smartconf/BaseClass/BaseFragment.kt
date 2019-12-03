@@ -18,6 +18,13 @@ open class BaseFragment: Fragment() {
 
     fun getAct(): MainActivity { return activity as MainActivity }
 
+    fun placeFragment(fragment: BaseFragment, view: Int) {
+        getAct().placeFragment(fragment, view)
+    }
+
+    fun setRootFragment(fragment: BaseFragment, view: Int) {
+        getAct().setRootFragment(fragment, view)
+    }
     //This functions help you to customize the Fragment
     open fun shouldUseCustomBack(): Boolean { return false }
     open fun getLayout(): Int { return R.layout.empty_layout }
