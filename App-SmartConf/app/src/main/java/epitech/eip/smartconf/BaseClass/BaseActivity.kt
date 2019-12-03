@@ -23,6 +23,14 @@ open class BaseActivity: AppCompatActivity() {
         fragment.commit()
     }
 
+    fun placeFragment(new_fragment: BaseFragment, view_location: Int = R.id.root_frag_view) {
+        val fragment = supportFragmentManager.beginTransaction()
+
+        fragment.replace(view_location, new_fragment, new_fragment.javaClass.name)
+        fragment.addToBackStack(new_fragment.tag)
+        fragment.commit()
+    }
+
     override fun onBackPressed() {
         if (getCurrentFragment()?.shouldUseCustomBack() == true) {
             getCurrentFragment()?.onCustomBackPressed()

@@ -21,5 +21,5 @@ open class BaseFragment: Fragment() {
     //This functions help you to customize the Fragment
     open fun shouldUseCustomBack(): Boolean { return false }
     open fun getLayout(): Int { return R.layout.empty_layout }
-    open fun onCustomBackPressed() { Toast.makeText(context, getString(R.string.toast_notcongifured), Toast.LENGTH_SHORT)}
+    open fun onCustomBackPressed() { Toast.makeText(context, getString(R.string.toast_notcongifured), Toast.LENGTH_SHORT).show() }
 }
