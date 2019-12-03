@@ -1,52 +1,43 @@
 from flask import Flask, render_template, request, make_response, g
-from config import config
-from redis import Redis
+from config import app
 import os
 import socket
 import random
 import json
 
-option_a = os.getenv('OPTION_A', "Ansible")
-option_b = os.getenv('OPTION_B', "Chef")
-option_c = os.getenv('OPTION_C', "Puppet")
-option_d = os.getenv('OPTION_B', "SaltStack")
-hostname = socket.gethostname()
-
-app = Flask(__name__)
+ALLOWED_EXTENSIONS = set(['txt', 'pdf'])
 
 
-def get_redis():
-    if not hasattr(g, 'redis'):
-        g.redis = Redis(host=os.environ['MY_REDIS'], db=0, socket_timeout=5)
-    return g.redis
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-@app.route("/", methods=['POST', 'GET'])
-def hello():
-    voter_id = request.cookies.get('voter_id')
-    if not voter_id:
-        voter_id = hex(random.getrandbits(64))[2:-1]
+@app.route('/', methods=['POST', 'GET'])
+def test(file):
+    print("test")
 
-    vote = None
-
-    if request.method == 'POST':
-        redis = get_redis()
-        vote = request.form['vote']
-        data = json.dumps({'voter_id': voter_id, 'vote': vote})
-        redis.rpush('votes', data)
-
-    resp = make_response(render_template(
-        'index.html',
-        option_a=option_a,
-        option_b=option_b,
-        option_c=option_c,
-        option_d=option_d,
-        hostname=hostname,
-        vote=vote,
-    ))
-    resp.set_cookie('voter_id', voter_id)
-    return resp
+@app.route('/file-upload', methods=['POST', 'GET'])
+def upload_file():
+    if 'file' not in request.files:
+        resp = jsonify({'message': 'No file part in the request'})
+        resp.status_code = 400
+        return resp
+    file = request.files['file']
+    if file.filename == '':
+        resp = jsonify({'message': 'No file selected for uploading'})
+        resp.status_code = 400
+        return resp
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        resp = jsonify({'message': 'File successfully uploaded'})
+        resp.status_code = 201
+        return resp
+    else:
+        resp = jsonify({'message': 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'})
+        resp.status_code = 400
+        return resp
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=80, debug=True, threaded=True)
+    app.run(host='127.0.0.1', port=5000, debug=True, threaded=True)
