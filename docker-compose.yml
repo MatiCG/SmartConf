@@ -11,7 +11,14 @@ services:
     restart: always
     environment:
       - HOST=redis
-
+  redis:
+    image: "redis:alpine"
+    container_name: redis
+    ports:
+      - "6379"
+    networks:
+      - ia-tier
+    restart: always
   db:
     image: postgres:10.3
     networks:
