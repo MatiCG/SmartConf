@@ -19,7 +19,7 @@ While the `master` branch stores the official release history, and the `develop`
 
 As you set up your environment, start by tracking the `develop` branch locally:
 ```
-[master] $ git checkout -b develop
+[master] $ git checkout develop
 [develop] $ git pull origin develop
 ```
 
