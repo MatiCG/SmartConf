@@ -13,8 +13,8 @@ def allowed_file(filename):
 
 
 @app.route('/', methods=['POST', 'GET'])
-def test(file):
-    print("test")
+def test():
+    return("test")
 
 @app.route('/file-upload', methods=['POST', 'GET'])
 def upload_file():
@@ -40,4 +40,4 @@ def upload_file():
 
 
 if __name__ == "__main__":
-    app.run(host='127.0.0.1', port=5000, debug=True, threaded=True)
+    app.run(port=5000, debug=True, threaded=True)
