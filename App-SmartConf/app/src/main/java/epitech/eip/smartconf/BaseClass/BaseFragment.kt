@@ -15,6 +15,7 @@ open class BaseFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         getAct().navbar.visibility = View.VISIBLE.takeIf { shouldShowNavBar() } ?: View.GONE
+        getAct().actionbar.visibility = View.VISIBLE.takeIf { shouldShowActionBar() } ?: View.GONE
         getAct().actionbar.addView(LayoutInflater.from(context).inflate(setCustomActionBar(), actionbar, false))
         return inflater.inflate(getLayout(), container, false)
     }
@@ -28,10 +29,16 @@ open class BaseFragment: Fragment() {
     fun setRootFragment(fragment: BaseFragment, view: Int = R.id.root_frag_view) {
         getAct().setRootFragment(fragment, view)
     }
+
+    fun removeFragment(delete_fragment: BaseFragment) {
+        getAct().removeFragment(delete_fragment)
+    }
+
     //This functions help you to customize the Fragment
     open fun shouldUseCustomBack(): Boolean { return false }
-    open fun getLayout(): Int { return R.layout.empty_layout }
-    open fun onCustomBackPressed() { Toast.makeText(context, getString(R.string.toast_notcongifured), Toast.LENGTH_SHORT).show() }
     open fun shouldShowNavBar(): Boolean { return false }
+    open fun shouldShowActionBar(): Boolean { return true }
+    open fun onCustomBackPressed() { Toast.makeText(context, getString(R.string.toast_notcongifured), Toast.LENGTH_SHORT).show() }
     open fun setCustomActionBar(): Int { return R.layout.actionbar_home_layout }
+    open fun getLayout(): Int { return R.layout.empty_layout }
 }

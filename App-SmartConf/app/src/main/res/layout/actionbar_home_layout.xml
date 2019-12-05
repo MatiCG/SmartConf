@@ -31,7 +31,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/expand_settings"
+        android:onClick="popUpMenu"
         android:layout_width="29dp"
         android:layout_height="29dp"
         android:layout_marginTop="16dp"
