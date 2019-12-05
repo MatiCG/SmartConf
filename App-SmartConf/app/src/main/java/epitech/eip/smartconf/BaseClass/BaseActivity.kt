@@ -31,6 +31,14 @@ open class BaseActivity: AppCompatActivity() {
         fragment.commit()
     }
 
+    fun removeFragment(delete_fragment: BaseFragment) {
+        val fragment = supportFragmentManager.beginTransaction()
+
+        fragment.remove(delete_fragment)
+        fragment.commit()
+
+    }
+
     override fun onBackPressed() {
         if (getCurrentFragment()?.shouldUseCustomBack() == true) {
             getCurrentFragment()?.onCustomBackPressed()
