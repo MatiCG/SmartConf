@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 requests
 python-firebase
 flask
 tensorflow==1.9
+=======
+Flask
+requests
+>>>>>>> 680d1cfc57d8d7d1cac4dfca44993fea8f709bec
