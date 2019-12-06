@@ -4,26 +4,39 @@ import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Toast
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 import epitech.eip.smartconf.BaseClass.BaseActivity
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.Fragments.AccountFragment
+import epitech.eip.smartconf.Fragments.Authentification.MainAuthFragment
 import epitech.eip.smartconf.Fragments.HomeFragment
 import epitech.eip.smartconf.Fragments.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var fragment: BaseFragment
+    private lateinit var mAuth: FirebaseAuth
+    private var USER_CONNECTED: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        navbar.setOnNavigationItemSelectedListener(this)
-        navbar.selectedItemId = R.id.home
+        mAuth = FirebaseAuth.getInstance()
+        authHandle()
+    }
+
+    private fun authHandle() {
+        USER_CONNECTED = true.takeIf { mAuth.currentUser != null } ?: false
+
+        if (!USER_CONNECTED) {
+            setRootFragment(MainAuthFragment())
+        } else {
+            navbar.setOnNavigationItemSelectedListener(this)
+            navbar.selectedItemId = R.id.home
+        }
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -50,8 +63,13 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         popup.menuInflater.inflate(R.menu.actionbar_popup_menu, popup.menu)
 
         popup.setOnMenuItemClickListener {
-            Toast.makeText(applicationContext, "Rien pour l'instant", Toast.LENGTH_SHORT).show()
-            false
+            when (it.itemId) {
+                R.id.logout -> {
+                    mAuth.signOut()
+                    authHandle()
+                }
+            }
+            true
         }
         popup.show()
     }
