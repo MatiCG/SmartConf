@@ -12,7 +12,6 @@ def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-<<<<<<< HEAD
 @app.route('/', methods=['GET'])
 def test():
     return("test")
@@ -23,10 +22,6 @@ def getfile():
     with open(file_name, 'r') as f:
         file_content = f.read()
     return file_content
-=======
-@app.route('/', methods=['POST', 'GET'])
-def test():
-    return("test")
 
 @app.route('/file-upload', methods=['POST', 'GET'])
 def upload_file():
@@ -50,7 +45,6 @@ def upload_file():
         resp.status_code = 400
         return resp
 
->>>>>>> 680d1cfc57d8d7d1cac4dfca44993fea8f709bec
 
 if __name__ == "__main__":
     app.run(port=5000, debug=True, threaded=True)

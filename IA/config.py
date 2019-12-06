@@ -1,5 +1,4 @@
 from flask import Flask
-<<<<<<< HEAD
 from firebase import firebase
 
 
@@ -27,7 +26,6 @@ class user:
                 'password': self.password
                 }
         result = firebase.post('/user/', data)
-=======
 
 UPLOAD_FOLDER = '/home/'
 
@@ -35,4 +33,3 @@ app = Flask(__name__)
 app.secret_key = "secret key"
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
->>>>>>> 680d1cfc57d8d7d1cac4dfca44993fea8f709bec
