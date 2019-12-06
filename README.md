@@ -1,6 +1,6 @@
 # SmartConf
 
-[![Build](https://github.com/MatiCG/SmartConf/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Docker+Image+CI) [![Build](https://github.com/MatiCG/SmartConf/workflows/Kotlin%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Kotlin+CI) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build](https://github.com/MatiCG/SmartConf/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Docker+Image+CI) [![Build](https://github.com/MatiCG/SmartConf/workflows/Kotlin%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Kotlin+CI) [![Build](https://github.com/MatiCG/SmartConf/workflows/Python%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Python+CI) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## Presentation
 
