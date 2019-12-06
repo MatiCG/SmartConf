@@ -1,5 +1,10 @@
 # SmartConf
-EIP Project
+
+[![Build](https://github.com/MatiCG/SmartConf/workflows/Docker%20Image%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Docker+Image+CI) [![Build](https://github.com/MatiCG/SmartConf/workflows/Kotlin%20CI/badge.svg)](https://github.com/MatiCG/SmartConf/actions?workflow=Kotlin+CI) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Presentation
+
+## Working with Branches
 
 1.  A `develop` branch is created from `master` and contains code from feature branches that has not been deployed to master
 2.  Day to day development is done on `feature` branches which are created from `develop` 
