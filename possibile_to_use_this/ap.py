@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
-from flask import Flask, render_template, request, make_response, g
+from flask import Flask, render_template, request, make_response, g, jsonify
+from werkzeug.utils import secure_filename
 from config import app
 import os
 import socket

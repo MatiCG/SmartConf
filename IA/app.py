@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, make_response, g
+from flask import Flask, render_template, request, make_response, g, jsonify
 from config import app
 import os
 import socket
