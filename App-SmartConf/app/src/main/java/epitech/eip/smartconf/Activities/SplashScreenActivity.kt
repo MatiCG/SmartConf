@@ -9,7 +9,7 @@ import epitech.eip.smartconf.R
 
 class SplashScreenActivity: BaseActivity() {
 
-    private val SPLASHSCREEN_TIME: Long = 2000
+    private val SPLASHSCREEN_TIME: Long = 500
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

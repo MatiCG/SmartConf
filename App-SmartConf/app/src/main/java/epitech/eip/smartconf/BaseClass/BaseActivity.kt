@@ -23,9 +23,13 @@ open class BaseActivity: AppCompatActivity() {
         fragment.commit()
     }
 
-    fun placeFragment(new_fragment: BaseFragment, view_location: Int = R.id.root_frag_view) {
+    fun placeFragment(new_fragment: BaseFragment, view_location: Int = R.id.root_frag_view,
+                      animEnter: Int = 0, animExit: Int = 0,
+                      backAnimEnter: Int = 0, backAnimExit: Int = 0) {
         val fragment = supportFragmentManager.beginTransaction()
 
+        if (animEnter + animExit != 0)
+            fragment.setCustomAnimations(animEnter, animExit, backAnimEnter, backAnimExit)
         fragment.replace(view_location, new_fragment, new_fragment.javaClass.name)
         fragment.addToBackStack(new_fragment.tag)
         fragment.commit()

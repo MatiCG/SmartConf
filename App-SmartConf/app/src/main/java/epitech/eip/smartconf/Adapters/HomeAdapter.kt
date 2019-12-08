@@ -21,7 +21,12 @@ class HomeAdapter(private var titles: List<String>, private var fragment: BaseFr
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
-            fragment.placeFragment(MeetingDescFragment(false.takeIf { position == 0 || position == 2} ?: true), R.id.root_frag_view)
+            fragment.placeFragment(MeetingDescFragment(false.takeIf { position == 0 || position == 2} ?: true),
+                R.id.root_frag_view,
+                R.transition.slide_in_left,
+                R.transition.slide_out_left,
+                R.transition.slide_out_right,
+                R.transition.slide_in_right)
         }
         holder.meeting_title.text = titles[position]
     }
