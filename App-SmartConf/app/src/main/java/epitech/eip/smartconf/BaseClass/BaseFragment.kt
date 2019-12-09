@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import epitech.eip.smartconf.MainActivity
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.actionbar_home_layout.view.*
+import kotlinx.android.synthetic.main.actionbar_return_layout.view.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 open class BaseFragment: Fragment() {
@@ -16,16 +17,22 @@ open class BaseFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         getAct().navbar.visibility = View.VISIBLE.takeIf { shouldShowNavBar() } ?: View.GONE
-        getAct().actionbar?.page_title?.text = setPageTitle()
         getAct().actionbar.visibility = View.VISIBLE.takeIf { shouldShowActionBar() } ?: View.GONE
-        getAct().actionbar.addView(LayoutInflater.from(context).inflate(setCustomActionBar(), actionbar, false))
+        val actionbarView = LayoutInflater.from(context).inflate(setCustomActionBar(), getAct().actionbar, false)
+        actionbarView?.page_title?.text = setPageTitle()
+        actionbarView?.back_btn?.setOnClickListener {
+            getAct().onBackPressed()
+        }
+        getAct().actionbar.addView(actionbarView)
         return inflater.inflate(getLayout(), container, false)
     }
 
     fun getAct(): MainActivity { return activity as MainActivity }
 
-    fun placeFragment(fragment: BaseFragment, view: Int = R.id.root_frag_view) {
-        getAct().placeFragment(fragment, view)
+    fun placeFragment(fragment: BaseFragment, view: Int = R.id.root_frag_view,
+                      animEnter: Int = 0, animExit: Int = 0,
+                      backAnimEnter: Int = 0, backAnimExit: Int = 0) {
+        getAct().placeFragment(fragment, view, animEnter, animExit, backAnimEnter, backAnimExit)
     }
 
     fun setRootFragment(fragment: BaseFragment, view: Int = R.id.root_frag_view) {

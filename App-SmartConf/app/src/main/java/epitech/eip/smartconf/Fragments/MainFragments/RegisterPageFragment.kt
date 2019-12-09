@@ -1,4 +1,4 @@
-package epitech.eip.smartconf.Fragments.Authentification
+package epitech.eip.smartconf.Fragments.MainFragments
 
 import android.content.Intent
 import android.os.Bundle

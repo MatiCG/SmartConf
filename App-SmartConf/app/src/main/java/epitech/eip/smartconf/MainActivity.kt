@@ -8,10 +8,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import epitech.eip.smartconf.BaseClass.BaseActivity
 import epitech.eip.smartconf.BaseClass.BaseFragment
-import epitech.eip.smartconf.Fragments.AccountFragment
+import epitech.eip.smartconf.Fragments.MainFragments.AccountFragment
 import epitech.eip.smartconf.Fragments.Authentification.MainAuthFragment
-import epitech.eip.smartconf.Fragments.HomeFragment
-import epitech.eip.smartconf.Fragments.SearchFragment
+import epitech.eip.smartconf.Fragments.MainFragments.HomeFragment
+import epitech.eip.smartconf.Fragments.MainFragments.SearchFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {

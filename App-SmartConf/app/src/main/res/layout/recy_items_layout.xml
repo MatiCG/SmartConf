@@ -4,12 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:elevation="2dp"
-    android:layout_marginTop="8dp"
+    android:layout_height="150dp"
+    app:cardCornerRadius="0dp"
+    android:layout_marginTop="0dp"
     android:layout_marginBottom="8dp"
-    android:layout_marginStart="16dp"
-    android:layout_marginEnd="16dp"
+    android:layout_marginEnd="32dp"
     style="@style/Widget.MaterialComponents.CardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,11 +19,12 @@
             android:id="@+id/meeting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="true"
             android:text="SmartConf meeting"
-            android:fontFamily="@font/opensans_regular"
+            android:fontFamily="@font/opensans_bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:layout_margin="4dp"/>
 
         <TextView
@@ -32,30 +32,33 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="starting in 3 days"
-            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/black"
+            android:fontFamily="@font/opensans_italic"
             app:layout_constraintStart_toStartOf="@id/meeting_title"
             app:layout_constraintTop_toBottomOf="@id/meeting_title" />
 
         <TextView
             android:id="@+id/meeting_desc"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:padding="16dp"
             android:fontFamily="@font/opensans_regular"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="16dp"
+            android:textColor="@color/black"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla nibh quis dolor tempus aliquam. Phasellus vel convallis lacus."
-            app:layout_constraintTop_toBottomOf="@id/meeting_status"
-            app:layout_constraintBottom_toTopOf="@id/imagebtn"
-            android:gravity="center_vertical|center_horizontal" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imagebtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/meeting_status" />
 
         <ImageView
             android:id="@+id/imagebtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:rotation="-90"
             android:src="@drawable/ic_arrow_down"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

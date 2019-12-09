@@ -6,6 +6,10 @@
 
     <TextView
         android:id="@+id/d"
+        android:text="synthesis"
+        android:textSize="42sp"
+        android:gravity="center"
+        android:fontFamily="@font/opensans_bold"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

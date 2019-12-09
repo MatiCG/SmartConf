@@ -21,14 +21,12 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
     }
 
     private fun loadInactive(): View{
-        val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_synthese_layout, frag_content, false)
-        view.d.text = "Recording meeting"
+        val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_readytostart_layout, frag_content, false)
         return view
     }
 
     private fun loadActive(): View{
         val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_synthese_layout, frag_content, false)
-        view.d.text = "Bon c'est juste un test mais la en gros c'est quand la synthèse de la reu est dispo !!"
         return view
     }
 }
