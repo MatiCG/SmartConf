@@ -1,44 +1,31 @@
 #!/usr/bin/env python3
 
 from flask import Flask, render_template, request, make_response, g
-from config import app
+#from config import *
 import os
 import socket
 import random
+from firebase import firebase
 import json
 
-ALLOWED_EXTENSIONS = set(['txt', 'pdf'])
+app = Flask(__name__)
+
+firebase = firebase.FirebaseApplication("https://smartconf-eip-epitech.firebaseio.com/", None)
+
+class Synthesis():
+    def __init__(self, token, text):
+        self.token_id = token
+        self.text_id = text
+    def add_synth(self):
+        result = firebase.put('/reunions/' + self.token_id, 'reunion_speech', self.text_id)
+        print(result)
 
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
-
-
-@app.route('/', methods=['POST', 'GET'])
-def test():
-    return("test")
-
-@app.route('/file-upload', methods=['POST', 'GET'])
-def upload_file():
-    if 'file' not in request.files:
-        resp = jsonify({'message': 'No file part in the request'})
-        resp.status_code = 400
-        return resp
-    file = request.files['file']
-    if file.filename == '':
-        resp = jsonify({'message': 'No file selected for uploading'})
-        resp.status_code = 400
-        return resp
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        resp = jsonify({'message': 'File successfully uploaded'})
-        resp.status_code = 201
-        return resp
-    else:
-        resp = jsonify({'message': 'Allowed file types are txt, pdf, png, jpg, jpeg, gif'})
-        resp.status_code = 400
-        return resp
+@app.route('/<reunion_id>/<text>', methods=['POST'])
+def test(reunion_id, text):
+    synth = Synthesis(reunion_id, text)
+    synth.add_synth()
+    return ("done")
 
 
 if __name__ == "__main__":

@@ -1,4 +1,11 @@
 numpy==1.14.3
 requests
 python-firebase
+pypi-install
 flask
+sseclient
+#multiprocess
+#python_jwt
+gcloud
+#pyasn1
+requests-toolbelt

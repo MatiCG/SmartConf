@@ -1,18 +1,22 @@
 #!/usr/bin/env python3
 
+import sys
 from firebase import firebase
 
 ## PUSH
-firebase = firebase.FirebaseApplication("https://smartconf-eip-epitech.firebaseio.com/", None)
-data =  { 'id': 0,
-    'leader_id': 0,
-    'reunion_title': 'test_reunion',
-    'reunion_date' : '12/12/2019',
-    'reunion_status': 'N/A',
-    'reunion_subject': 'word1, word2, word3, word4'
-    }
-result = firebase.post('/reunions/',data)
-print(result)
+#firebase = firebase.FirebaseApplication("https://smartconf-eip-epitech.firebaseio.com", None)
+# data =  {
+#         'username': 'userr1',
+#         'email': 'user1@gmail.com',
+#         'password': 'uner1user1'
+#     }
+# result = firebase.post('/users',data)
+# print(result)
+
+token = sys.argv[1]
+data = sys.argv[2]
+firebase = firebase.FirebaseApplication("https://smartconf-eip-epitech.firebaseio.com", None)
+result = firebase.put('/reunions/' + str(token), 'reunion_speech', data)
 
 ## GET
 #def firebaseGet():
