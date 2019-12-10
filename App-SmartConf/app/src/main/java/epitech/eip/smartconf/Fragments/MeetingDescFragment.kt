@@ -1,7 +1,9 @@
 package epitech.eip.smartconf.Fragments
 
-import android.media.MediaRecorder
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
@@ -16,15 +18,10 @@ import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.frag_meetingdesc_layout.*
 import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
-import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
+import java.util.*
 
-class MeetingDescFragment(private val meetingsId: String, private var active: Boolean): BaseFragment() {
-    private var output: String? = null
-    private var mediaRecorder: MediaRecorder? = null
-    private var IS_RECORDING: Boolean = false
-    private var ref = FirebaseDatabase.getInstance().getReference("meetings").child(meetingsId)
+class MeetingDescFragment(private var active: Boolean): BaseFragment() {
+    private var state: Boolean = false
 
     private lateinit var storage: FirebaseStorage
 
@@ -39,35 +36,9 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
             ref.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    meeting_title2.text = p0
-                        .child("title")
-                        .value.toString()
-                    meeting_desc2.text = p0
-                        .child("subject")
-                        .value.toString()
-                }
-            })
 
-            output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
-            mediaRecorder = MediaRecorder()
-
-            mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            mediaRecorder?.setAudioEncodingBitRate(16 * 44100)
-            mediaRecorder?.setAudioSamplingRate(44100)
-            mediaRecorder?.setOutputFile(output)
-
-
-            button_start_recording.setOnClickListener {
-                Snackbar.make(view, "Recording...", Snackbar.LENGTH_SHORT).show()
-                startRecording()
-            }
-            button_stop_recording.setOnClickListener {
-                Snackbar.make(view, "Stop recording...", Snackbar.LENGTH_SHORT).show()
-                stopRecording()
-            }
+        button_start_recording.setOnClickListener {
+            toText()
         }
     }
 
@@ -81,34 +52,31 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
         return view
     }
 
-    private fun startRecording() {
+    private fun toText() {
+        val mIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        mIntent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
+        mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+        mIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking")
+
         try {
-            mediaRecorder?.prepare()
-            mediaRecorder?.start()
-            IS_RECORDING = true
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
+            startActivityForResult(mIntent, 100)
+        } catch (e: Exception) {
+            Toast.makeText(context, "Error : " + e.message, Toast.LENGTH_SHORT)
         }
     }
 
-    private fun stopRecording(){
-        if(IS_RECORDING){
-            try {
-                mediaRecorder?.stop()
-                mediaRecorder?.release()
-                IS_RECORDING = false
-
-                storage = FirebaseStorage.getInstance()
-                val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.wav")
-
-                val stream = FileInputStream(File(output))
-
-                storageRef.putStream(stream)
-            } catch (e: IOException) { }
-        } else{
-            Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when(requestCode) {
+            100 -> {
+                if (resultCode == Activity.RESULT_OK && null != data) {
+                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                    textTV.text = result[0]
+                }
+            }
         }
     }
 
