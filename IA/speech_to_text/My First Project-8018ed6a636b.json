@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "polynomial-net-261609",
+  "private_key_id": "8018ed6a636b1c70dacc03dd9f2f527d8a1eca2e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDr57wAxy0QCPBi\nnIH7c1ugnMptsLLathDU19szF5nIq/GRDZde+0Cwrz0hl5h1UpAss8Q5vuQ8PEJV\niWYJEKqMqLtFGQsOxOZrNLDSAd0o8HMSaIPCEfkZRhJBr/rRsy0uhzCV1ZnmEW1k\nYtCAibrRz4JMNTo1G3UApjS1qtmsfQRD18n6kw8WZxm/65VD9efrUW3E7KYb5L38\nKiei1un9rKMI0R33OPOR6uEH9zXEO/sTXcmjygWsP/u6o02ytY8JE45SOqP92ro1\n7PWDsx1AXS11i7dRUgGbc06Ty7rrXJjF2v7VD2SFUfxymLmbnuNjzcGfKwV9Lf6e\n0sd8geaNAgMBAAECggEAGp1FjNnrt9ImWp25HWb9mKBvxxHHD904B2dF69z3BNh/\nM6PypqzWdsiCb1KEyQG0UdLDKdejNLeArVlHuXCXqTBVFl3VrUgiDci/RSYgLyD3\nfoVrjf7MmWEaKK6Dr9pU19m5LcJQL1BahNeQGdxQByEv3EyqATlUiSr3KeK5VZf6\nql4i9R5uM3/qmnuutwsGVVkFWIMjGXnJHAyR21XEbg4CIGP4g7dcFMrrX2TRq5ev\ngVWgz1vywGkZO9Cpk4yl4of9lahjVvT/uxXk+jmwDbKSY/gLL4xCrki9q/Ao7Ucz\nJj/um3XLkFCXRVORBRdQbd47F93ePHUOkv6HJJSCEQKBgQD3ZfRkF5H1PeNbnWT0\nT33rzGzSWFa0A5XPzyYLZMZ7LwS22SYNfGF6WFP46niaSqZBnv2YLeRxlMnruA9T\nRlnjx9bR4rANiWhs250eugnQiPn57Uqv2yGLqHJJq7J8fDn2NXarWtB3s/jce9tk\nIuPHuyvp5POP0X/zGNS6NUUbkQKBgQD0G3t2meiaJ8yUPB7NYwgX8gIbzK9NxC0m\n4MtLvbEn+1BuODMazv/RO8VQcXxALMkYG1g3T/mJCMKIb0zs2iAMiqca60VFWGF8\nXEFP6AvzXWeLJX3mshlb1SkzoBQFNjNelyzjvdFOH88es/J6ZrBfu0WHOT6CvQ89\n35P6HDiFPQKBgHlJ8NEJhTNYjhiiR5ZHSpLJ/Cf7yzYh89aX1i0L0QsfeA4006UU\n761NlI2aVlo+ctgFHIr5JOBSc9QuvsSy3ur/VGA95NYeIaYM3TDtQFaOcQ+IuG8S\n3ZVclftsQ+sn9Dqy52UG9uFYyI8/4cVsHYQUTWk0J/zAVxxVdiV8bE8hAoGAa8KS\nDzpEP4EgQ7QCmQKFuSRhn+oM3VSj5gzIUghMY20DBZUTolsM/U3YffmLMz1SDK1N\nlSVd8AuI7PfNSqXEDiVLPYvsyX8Jkf+b6W1zkRyDsB595NBsd2izRpH9JIvXw4MT\nEvphoo5SPaiMe1JHvAsM13QCz24sg1DmnzvEC7UCgYEAvYKs3QUrvBCTIEVED8FP\nAFqLVal3OerdvIr6VJbmcwVuEoFWPUyyNHpgGFLj4eRUPhDsOYyV9asTDbrm3Eqe\nFgeX+6lfZe3XCh0pooTw2B0I8q4gl0qktS5sI7/ZSTxMGhH0VqwLeb75IKw1OuC/\n8O6JeIaSgIgu/2+aA1ZtpkU=\n-----END PRIVATE KEY-----\n",
+  "client_email": "smartconf@polynomial-net-261609.iam.gserviceaccount.com",
+  "client_id": "114752986382039985187",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/smartconf%40polynomial-net-261609.iam.gserviceaccount.com"
+}
