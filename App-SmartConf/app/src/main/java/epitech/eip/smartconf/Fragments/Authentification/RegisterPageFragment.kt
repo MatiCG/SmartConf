@@ -1,4 +1,4 @@
-package epitech.eip.smartconf.Fragments.MainFragments
+package epitech.eip.smartconf.Fragments.Authentification
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,18 +9,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.MainActivity
+import epitech.eip.smartconf.Model.User
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.frag_register_layout.*
 
 class RegisterPageFragment: BaseFragment() {
     override fun getLayout(): Int { return R.layout.frag_register_layout }
     override fun shouldShowActionBar(): Boolean { return false }
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
         btn_register.setOnClickListener {
             val email = email_field.text.toString()
             val password = password_field.text.toString()
@@ -45,16 +44,12 @@ class RegisterPageFragment: BaseFragment() {
             }
     }
 
-    private fun addUserDataToDatabase(email: String, Fname: String = "not_defined", Lname: String = "not_defined") {
-        val user = mAuth.currentUser
-        val map: MutableMap<String, String> = HashMap()
-        if (user != null) {
-            val ref = FirebaseDatabase.getInstance().getReference("users")
-            map["email"] = email
-            map["Fname"] = Fname
-            map["Lname"] = Lname
-            ref.child(user.uid).setValue(map)
-        }
+    private fun addUserDataToDatabase(email: String) {
+        val user = mAuth.currentUser!!
+        val mUser = User(user.uid, email)
+        val ref = FirebaseDatabase.getInstance().getReference("users")
+
+        ref.child(user.uid).setValue(mUser)
     }
 
     private fun validateForm(email: String, password: String): Boolean {

@@ -3,7 +3,6 @@ package epitech.eip.smartconf.Fragments.Authentification
 import android.os.Bundle
 import android.view.View
 import epitech.eip.smartconf.BaseClass.BaseFragment
-import epitech.eip.smartconf.Fragments.MainFragments.RegisterPageFragment
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.auth_sigbtns_layout.*
 
