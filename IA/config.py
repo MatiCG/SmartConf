@@ -1,12 +1,12 @@
-from flask import Flask
-from firebase import firebase
+nice_words = ["point suivant", "ordre",
+              "necessaire", "important", "crucial"]
 
-firebase = firebase.FirebaseApplication("https://smartconf-eip-epitech.firebaseio.com/", None)
-
-class Synthesis():
-    def __init__(self, token, text):
-        self.token_id = token
-        self.text_id = text
-    def add_synth(self):
-        result = firebase.put('/reunions/' + self.token_id, 'reunion_speech', self.text_id)
-        print(result)
+def begin_synthesis(text, keywords):
+    i = 0
+    text2 = text.lower()
+    tab = keywords + nice_words
+    while i < len(tab):
+        text2 = text2.replace(tab[i], tab[i].upper())
+        i = i + 1
+    print(text2)
+    return text2
