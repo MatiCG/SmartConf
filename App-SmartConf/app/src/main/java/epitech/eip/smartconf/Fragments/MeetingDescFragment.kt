@@ -6,22 +6,17 @@ import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
-import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
+import epitech.eip.smartconf.SpeechToText.SpeechRecognizerViewModel
 import kotlinx.android.synthetic.main.frag_meetingdesc_layout.*
 import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
-import java.util.*
 
 class MeetingDescFragment(private var active: Boolean): BaseFragment() {
-    private var state: Boolean = false
+    private lateinit var speechRecognizerViewModel: SpeechRecognizerViewModel
 
     private lateinit var storage: FirebaseStorage
 
@@ -38,7 +33,31 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
 
 
         button_start_recording.setOnClickListener {
-            toText()
+            if (speechRecognizerViewModel.isListening) {
+                speechRecognizerViewModel.stopListening()
+            } else {
+                speechRecognizerViewModel.startListening()
+            }
+        }
+        setupSpeechViewModel()
+    }
+
+    private fun setupSpeechViewModel() {
+        speechRecognizerViewModel = ViewModelProviders.of(this).get(SpeechRecognizerViewModel::class.java)
+        speechRecognizerViewModel.getViewState().observe(this, Observer<SpeechRecognizerViewModel.ViewState> { viewState ->
+            render(viewState)
+        })
+    }
+
+    private fun render(uiOutput: SpeechRecognizerViewModel.ViewState?) {
+        if (uiOutput == null) return
+
+        textTV.text = uiOutput.spokenText
+
+        button_start_recording.background  = if (uiOutput.isListening) {
+            context!!.resources.getDrawable(R.drawable.ic_mic_off, null)
+        } else {
+            context!!.resources.getDrawable(R.drawable.ic_mic, null)
         }
     }
 
@@ -50,22 +69,6 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
     private fun loadActive(): View{
         val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_synthese_layout, frag_content, false)
         return view
-    }
-
-    private fun toText() {
-        val mIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        mIntent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
-        mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-        mIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start Speaking")
-
-        try {
-            startActivityForResult(mIntent, 100)
-        } catch (e: Exception) {
-            Toast.makeText(context, "Error : " + e.message, Toast.LENGTH_SHORT)
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
