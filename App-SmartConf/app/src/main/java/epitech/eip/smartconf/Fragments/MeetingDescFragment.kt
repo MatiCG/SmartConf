@@ -17,9 +17,7 @@ import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
 
 class MeetingDescFragment(private var active: Boolean): BaseFragment() {
     private lateinit var speechRecognizerViewModel: SpeechRecognizerViewModel
-
-    private lateinit var storage: FirebaseStorage
-
+    var state = false
     override fun getLayout(): Int { return R.layout.frag_meetingdesc_layout }
     override fun setCustomActionBar(): Int { return R.layout.actionbar_return_layout }
 
@@ -53,8 +51,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
         if (uiOutput == null) return
 
         textTV.text = uiOutput.spokenText
-
-        button_start_recording.background  = if (uiOutput.isListening) {
+        button_start_recording.background  = if (state == true) {
             context!!.resources.getDrawable(R.drawable.ic_mic_off, null)
         } else {
             context!!.resources.getDrawable(R.drawable.ic_mic, null)
@@ -69,22 +66,5 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
     private fun loadActive(): View{
         val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_synthese_layout, frag_content, false)
         return view
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        when(requestCode) {
-            100 -> {
-                if (resultCode == Activity.RESULT_OK && null != data) {
-                    val result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                    textTV.text = result[0]
-                }
-            }
-        }
-    }
-
-    fun createToken(): String {
-        val chars = ('0'..'9').toList().toTypedArray() + ('a'..'z').toList().toTypedArray()
-        return (1..32).map { chars.random() }.joinToString { "" }
     }
 }
