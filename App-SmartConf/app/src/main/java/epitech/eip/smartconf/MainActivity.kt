@@ -12,6 +12,7 @@ import epitech.eip.smartconf.Fragments.MainFragments.AccountFragment
 import epitech.eip.smartconf.Fragments.Authentification.MainAuthFragment
 import epitech.eip.smartconf.Fragments.MainFragments.HomeFragment
 import epitech.eip.smartconf.Fragments.MainFragments.SearchFragment
+import epitech.eip.smartconf.Model.User
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
@@ -19,6 +20,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     private lateinit var fragment: BaseFragment
     private lateinit var mAuth: FirebaseAuth
     private var USER_CONNECTED: Boolean = false
+    lateinit var mUser: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +31,13 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     private fun authHandle() {
-        USER_CONNECTED = true.takeIf { mAuth.currentUser != null } ?: false
+        val user = mAuth.currentUser
+        USER_CONNECTED = true.takeIf { user != null } ?: false
 
         if (!USER_CONNECTED) {
             setRootFragment(MainAuthFragment())
         } else {
+            mUser = User(user!!.uid, user.email!!)
             navbar.setOnNavigationItemSelectedListener(this)
             navbar.selectedItemId = R.id.home
         }

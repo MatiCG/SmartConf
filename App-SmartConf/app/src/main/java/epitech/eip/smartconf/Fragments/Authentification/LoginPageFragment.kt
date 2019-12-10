@@ -3,11 +3,17 @@ package epitech.eip.smartconf.Fragments.Authentification
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.MainActivity
+import epitech.eip.smartconf.Model.User
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.frag_login_layout.*
 
@@ -15,12 +21,9 @@ class LoginPageFragment: BaseFragment() {
     override fun getLayout(): Int { return R.layout.frag_login_layout }
     override fun shouldShowActionBar(): Boolean { return false }
 
-    private lateinit var mAuth: FirebaseAuth
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
         btn_login.setOnClickListener {
             val email = email_field.text.toString()
             val password = password_field.text.toString()
