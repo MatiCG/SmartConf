@@ -75,7 +75,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
             mediaRecorder?.stop()
             mediaRecorder?.release()
             state = false
-            Toast.makeText(context, "Stop", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
         }
