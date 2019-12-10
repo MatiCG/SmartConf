@@ -27,7 +27,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
 
         frag_content.addView(loadActive().takeIf { active } ?: loadInactive())
 
-        output = Environment.getExternalStorageDirectory().absolutePath + "/recording.3gp"
+        output = Environment.getExternalStorageDirectory().absolutePath + "/recording.wav"
         Toast.makeText(context, output, Toast.LENGTH_SHORT).show()
         mediaRecorder = MediaRecorder()
 
