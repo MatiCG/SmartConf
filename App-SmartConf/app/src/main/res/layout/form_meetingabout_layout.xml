@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <EditText
-        android:id="@+id/title"
+        android:id="@+id/test"
         style="@style/MyEditTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="340dp"
@@ -16,7 +16,7 @@
         android:fontFamily="@font/opensans_regular"
         android:gravity="center"
         android:hint="Tell us more about this"
-        android:inputType="textPersonName"
+        android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

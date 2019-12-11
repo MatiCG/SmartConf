@@ -17,7 +17,6 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         frag_content.addView(loadActive().takeIf { active } ?: loadInactive())
-
     }
 
     private fun loadInactive(): View{
