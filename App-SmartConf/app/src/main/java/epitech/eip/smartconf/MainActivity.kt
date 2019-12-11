@@ -61,7 +61,6 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if (!USER_CONNECTED) {
             setRootFragment(MainAuthFragment())
         } else {
-            mUser = User(user!!.uid, user.email!!)
             navbar.setOnNavigationItemSelectedListener(this)
             navbar.selectedItemId = R.id.home
         }
