@@ -27,7 +27,8 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
 
         frag_content.addView(loadActive().takeIf { active } ?: loadInactive())
 
-        output = Environment.getExternalStorageDirectory().absolutePath + "/recording.wav"
+        output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
+        //Environment.getExternalStorageDirectory().absolutePath + "/recording.wav"
         Toast.makeText(context, output, Toast.LENGTH_SHORT).show()
         mediaRecorder = MediaRecorder()
 
@@ -75,7 +76,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
             mediaRecorder?.stop()
             mediaRecorder?.release()
             state = false
-            cloudStorage.uploadFile(Environment.getExternalStorageDirectory().absolutePath + "/recording.wav", "https://console.cloud.google.com/storage/browser/wavsoundfilebucket")
+            cloudStorage.uploadFile(context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav", "https://console.cloud.google.com/storage/browser/wavsoundfilebucket")
             Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
