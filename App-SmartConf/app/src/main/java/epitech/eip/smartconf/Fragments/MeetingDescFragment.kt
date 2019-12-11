@@ -1,7 +1,5 @@
 package epitech.eip.smartconf.Fragments
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.media.MediaRecorder
 import android.os.Bundle
 import android.os.Environment
@@ -10,11 +8,13 @@ import android.view.View
 import android.widget.Toast
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
+import epitech.eip.smartconf.cloudstorage.CloudStorageHelper
 import kotlinx.android.synthetic.main.frag_meetingdesc_layout.*
 import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
 import java.io.IOException
 
 class MeetingDescFragment(private var active: Boolean): BaseFragment() {
+    private var cloudStorage: CloudStorageHelper = CloudStorageHelper()
     private var output: String? = null
     private var mediaRecorder: MediaRecorder? = null
     private var state: Boolean = false
@@ -75,7 +75,8 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
             mediaRecorder?.stop()
             mediaRecorder?.release()
             state = false
-                    Toast.makeText(context, "Stop!      ", Toast.LENGTH_SHORT).show()
+            cloudStorage.uploadFile(Environment.getExternalStorageDirectory().absolutePath + "/recording.wav", "https://console.cloud.google.com/storage/browser/wavsoundfilebucket")
+            Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
         }
