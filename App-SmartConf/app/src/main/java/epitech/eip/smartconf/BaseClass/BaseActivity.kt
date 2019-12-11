@@ -2,13 +2,9 @@ package epitech.eip.smartconf.BaseClass
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
-import epitech.eip.smartconf.Model.User
 import epitech.eip.smartconf.R
-import epitech.eip.smartconf.RequestsFirebase.Requests
 
 open class BaseActivity: AppCompatActivity() {
-    val request: Requests = Requests()
-
     fun setRootFragment(new_fragment: BaseFragment, view_root: Int = R.id.root_frag_view) {
         val fragmentId = new_fragment.fragmentId.takeIf { it > 0 } ?: view_root
         try {

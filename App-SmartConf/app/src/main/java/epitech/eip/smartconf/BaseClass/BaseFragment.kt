@@ -16,16 +16,15 @@ import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.actionbar_home_layout.view.*
 import kotlinx.android.synthetic.main.actionbar_return_layout.view.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.frag_home_layout.*
 
 open class BaseFragment: Fragment() {
     var fragmentId: Int = 0
     lateinit var mAuth: FirebaseAuth
-    private val database = FirebaseDatabase.getInstance()
-    private var ref = database.getReference("users")
+    private var ref = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onStart() {
         super.onStart()
-
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
@@ -36,9 +35,9 @@ open class BaseFragment: Fragment() {
                     val firebaseMeetings = parent?.child("meetingsId")?.value
 
                     if (firebaseMeetings != null) {
-                        val test: MutableList<String>? = firebaseMeetings as? MutableList<String>
-                        if (test != null)
-                            getAct().mUser.setMeetingsId(test)
+                        val meetingsList: MutableList<String>? = firebaseMeetings as? MutableList<String>
+                        if (meetingsList != null)
+                            getAct().mUser.setMeetingsId(meetingsList)
                     }
                 }
             }
