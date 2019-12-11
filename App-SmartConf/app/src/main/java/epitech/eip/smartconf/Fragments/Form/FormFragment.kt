@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.Fragments.MainFragments.HomeFragment
@@ -56,19 +55,16 @@ class FormFragment: BaseFragment() {
         val ref = FirebaseDatabase.getInstance().getReference("meetings")
         val userRef = FirebaseDatabase.getInstance().getReference("users")
 
-        //trouver sur internet
-        val chars = ('0'..'9').toList().toTypedArray() + ('a'..'z').toList().toTypedArray()
-        val token = (1..32).map { chars.random() }.joinToString("")
-        // fin du trouver sur internet
-
-        //Add the new meeting ID
-        getAct().mUser.addMeetingsId(token)
-
+        getAct().mUser.addMeetingsId(createToken())
         //Add meeting data
-        ref.child(token).setValue(meetings)
-
+        ref.child(createToken()).setValue(meetings)
         //Update user data
         userRef.child(mAuth.currentUser!!.uid).setValue(getAct().mUser)
-        Toast.makeText(context, "DONE", Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "Meeting uploaded !", Toast.LENGTH_SHORT).show()
+    }
+
+    fun createToken(): String {
+        val chars = ('0'..'9').toList().toTypedArray() + ('a'..'z').toList().toTypedArray()
+        return (1..32).map { chars.random() }.joinToString("")
     }
 }

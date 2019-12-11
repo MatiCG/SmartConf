@@ -35,38 +35,3 @@ class User {
         this.meetings.add(meeting_id)
     }
 }
-/*
-class User(user_token: String, user_email: String, user_fname: String, user_lname: String) {
-    private var token: String = user_token
-    private var email: String = user_email
-    private var first_name: String = user_fname
-    private var last_name: String = user_lname
-    private var my_meetings: List<String>? = listOf("example_of_meeting_id_:_gufgU69G62RNIZy02wlrj2EQCpW")
-
-    //Getters
-    fun getEmail(): String {
-        return email
-    }
-
-    fun getFirstName(): String {
-        return first_name
-    }
-
-    fun getLastName(): String {
-        return last_name
-    }
-
-    fun getMeetings(): List<String>? {
-        return my_meetings
-    }
-
-    fun getToken(): String {
-        return token
-    }
-
-    //Setters
-    fun setEmail(pEmail: String) {
-        email = pEmail
-    }
-}
- */
