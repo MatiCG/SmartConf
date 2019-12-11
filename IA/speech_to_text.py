@@ -93,7 +93,7 @@ def write_transcripts(transcript_filename,transcript):
     f.write(transcript)
     f.close()
 
-if __name__ == "__main__":
+def script_pourri_de_guillaume():
     #sys.path.append('/path/to/ffmpeg')
     for audio_file_name in os.listdir(filepath):
         print(audio_file_name)

@@ -2,6 +2,7 @@
 
 from flask import Flask
 from config import begin_synthesis
+from speech_to_text import script_pourri_de_guillaume
 from firebase import firebase
 
 app = Flask(__name__)
