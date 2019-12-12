@@ -31,7 +31,7 @@ class CloudStorageHelper {
 
         var iss= File(string).inputStream()
         var os = ByteArrayOutputStream()
-        var readBuf = ByteArray(4096)
+        var readBuf = ByteArray(4000000)
 
         while (iss.available() > 0) {
             var bytesRead = iss.read(readBuf)
