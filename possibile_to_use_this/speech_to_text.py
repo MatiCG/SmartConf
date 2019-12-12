@@ -96,12 +96,12 @@ def write_transcripts(transcript_filename, transcript):
     f.close()
 
 def script_pourri_de_guillaume(file_name):
+    upload_to_clood("audio.wav")
     transcript = google_transcribe(file_name)
     return transcript
 
 
-if __name__ == "__main__":
-    upload_to_clood("recording.wav")
-    tr = script_pourri_de_guillaume("recording.wav")
-    print(tr)
+#if __name__ == "__main__":
+#    tr = script_pourri_de_guillaume("audio.wav")
+#    print(tr)
 
