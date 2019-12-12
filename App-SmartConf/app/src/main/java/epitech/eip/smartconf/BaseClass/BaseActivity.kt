@@ -1,12 +1,10 @@
 package epitech.eip.smartconf.BaseClass
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import epitech.eip.smartconf.R
 
 open class BaseActivity: AppCompatActivity() {
-
     fun setRootFragment(new_fragment: BaseFragment, view_root: Int = R.id.root_frag_view) {
         val fragmentId = new_fragment.fragmentId.takeIf { it > 0 } ?: view_root
         try {

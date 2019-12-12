@@ -15,12 +15,11 @@ import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
 
-class MeetingDescFragment(private var active: Boolean): BaseFragment() {
+class MeetingDescFragment(private val meetingsId: String, private var active: Boolean): BaseFragment() {
     private var output: String? = null
     private var mediaRecorder: MediaRecorder? = null
     private var state: Boolean = false
 
-    private lateinit var mAuth: FirebaseAuth
     private lateinit var storage: FirebaseStorage
 
     override fun getLayout(): Int { return R.layout.frag_meetingdesc_layout }
@@ -34,7 +33,6 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
 
         output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
         //Environment.getExternalStorageDirectory().absolutePath + "/recording.wav"
-        Toast.makeText(context, output, Toast.LENGTH_SHORT).show()
         mediaRecorder = MediaRecorder()
 
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -82,7 +80,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
                 state = false
 
                 storage = FirebaseStorage.getInstance()
-                val storageRef = storage.reference.child("Meetings/Sounds/" + createToken())
+                val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.wav")
 
                 val stream = FileInputStream(File(output))
 

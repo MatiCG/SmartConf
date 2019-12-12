@@ -6,16 +6,46 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import epitech.eip.smartconf.MainActivity
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.actionbar_home_layout.view.*
 import kotlinx.android.synthetic.main.actionbar_return_layout.view.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.frag_home_layout.*
 
 open class BaseFragment: Fragment() {
     var fragmentId: Int = 0
+    lateinit var mAuth: FirebaseAuth
+    private var ref = FirebaseDatabase.getInstance().getReference("users")
+
+    override fun onStart() {
+        super.onStart()
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+            }
+
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (activity is MainActivity) {
+                    val parent = mAuth.currentUser?.uid?.let { dataSnapshot.child(it) }
+                    val firebaseMeetings = parent?.child("meetingsId")?.value
+
+                    if (firebaseMeetings != null) {
+                        val meetingsList: MutableList<String>? = firebaseMeetings as? MutableList<String>
+                        if (meetingsList != null)
+                            getAct().mUser.setMeetingsId(meetingsList)
+                    }
+                }
+            }
+        })
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        mAuth = FirebaseAuth.getInstance()
         getAct().navbar.visibility = View.VISIBLE.takeIf { shouldShowNavBar() } ?: View.GONE
         getAct().actionbar.visibility = View.VISIBLE.takeIf { shouldShowActionBar() } ?: View.GONE
         val actionbarView = LayoutInflater.from(context).inflate(setCustomActionBar(), getAct().actionbar, false)
