@@ -9,12 +9,12 @@ firebase_sql = firebase.FirebaseApplication("https://smartconf-eip-epitech.fireb
 
 class Synthesis():
     def __init__(self, token, text):
-        result = firebase_sql.get('/reunions/' + token + "/reunion_subject", None)
+        result = firebase_sql.get('/meetings/' + token + "/subject", None)
         text = begin_synthesis(text, result.split(", "))
         self.token_id = token
         self.text_id = text
     def add_synth(self):
-        result = firebase_sql.put('/reunions/' + self.token_id, 'reunion_speech', self.text_id)
+        result = firebase_sql.put('/meetings/' + self.token_id, 'peech', self.text_id)
 
 @app.route('/<reunion_id>/<filename>', methods=['POST', 'GET'])
 def test(reunion_id, filename):
