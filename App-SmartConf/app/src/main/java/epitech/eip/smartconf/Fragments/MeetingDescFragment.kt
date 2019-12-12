@@ -73,11 +73,17 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
 
     private fun stopRecording(){
         if(state){
-            mediaRecorder?.stop()
-            mediaRecorder?.release()
-            state = false
-            cloudStorage.uploadFile(context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav", "https://console.cloud.google.com/storage/browser/wavsoundfilebucket")
-            Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
+            try {
+                mediaRecorder?.stop()
+                mediaRecorder?.release()
+                state = false
+                cloudStorage.uploadFile(Environment.getExternalStorageDirectory().absolutePath + "/recording.wav",
+                    "https://console.cloud.google.com/storage/browser/wavsoundfilebucket"
+                )
+                Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
+            } catch (e: IOException) {
+
+            }
         }else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
         }
