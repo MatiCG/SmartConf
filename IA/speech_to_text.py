@@ -31,7 +31,7 @@ def mp3_to_wav(audio_file_name):
         sound.export(audio_file_name, format="wav")
 
 def frame_rate_channel(audio_file_name):
-    with wave.open("audio.wav", "rb") as wave_file:
+    with wave.open(audio_file_name, "rb") as wave_file:
         frame_rate = wave_file.getframerate()
         channels = wave_file.getnchannels()
     return frame_rate, channels
@@ -72,11 +72,11 @@ def google_transcribe(file_name):
     transcript = ''
     client = speech.SpeechClient()
     audio = types.RecognitionAudio(uri=gcs_uri)
-    frame_rate, channels = frame_rate_channel(file_name)
+    #frame_rate, channels = frame_rate_channel(file_name)
 
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
-        sample_rate_hertz=frame_rate,
+        sample_rate_hertz=48000,
         language_code='fr-FR')
 
     # Detects speech in the audio file
@@ -104,6 +104,6 @@ def script_pourri_de_guillaume(file_name):
 
 #if __name__ == "__main__":
   #  #upload_to_clood("audio.wav")
-    #tr = script_pourri_de_guillaume("")
+    #tr = script_pourri_de_guillaume("audio.wav")
     #print(tr)
 
