@@ -12,6 +12,8 @@ from google.cloud.speech import enums
 from google.cloud.speech import types
 import wave
 from google.cloud import storage
+import firebase_admin
+from firebase_admin import credentials
 
 def stereo_to_mono(audio_file_name):
     sound = AudioSegment.from_wav(audio_file_name)
@@ -66,7 +68,7 @@ def upload_to_clood(audio_file_name):
     upload_blob(bucket_name, source_file_name, destination_blob_name)
 
 def google_transcribe(file_name):
-    gcs_uri = 'gs://' + bucketname + '/' + file_name
+    gcs_uri = 'gs://smartconf-eip-epitech.appspot.com/Meetings/' + file_name
     transcript = ''
     client = speech.SpeechClient()
     audio = types.RecognitionAudio(uri=gcs_uri)
@@ -84,7 +86,7 @@ def google_transcribe(file_name):
     for result in response.results:
         transcript += result.alternatives[0].transcript
 
-    delete_blob(bucketname, file_name)
+    #delete_blob(bucketname, file_name)
 
     return transcript
 
@@ -94,12 +96,14 @@ def write_transcripts(transcript_filename, transcript):
     f.close()
 
 def script_pourri_de_guillaume(file_name):
+    cred = credentials.Certificate("./fire.json")
+    firebase_admin.initialize_app(cred)
     transcript = google_transcribe(file_name)
     return transcript
 
 
-##if __name__ == "__main__":
+#if __name__ == "__main__":
   #  #upload_to_clood("audio.wav")
-   # tr = script_pourri_de_guillaume("recording.wav")
+    #tr = script_pourri_de_guillaume("")
     #print(tr)
 
