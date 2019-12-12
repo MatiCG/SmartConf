@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <EditText
-        android:id="@+id/test"
-        style="@style/MyEditTextStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="340dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:ems="10"
-        android:fontFamily="@font/opensans_regular"
-        android:gravity="center"
-        android:hint="Tell us more about this"
-        android:inputType="text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="32dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/form_input_subject"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Meetings main subject" />
+    </com.google.android.material.textfield.TextInputLayout>
+</LinearLayout>

@@ -10,6 +10,7 @@
         android:id="@+id/actionbar"
         android:layout_width="match_parent"
         android:layout_height="58dp"
+        android:visibility="gone"
         style="@style/Widget.MaterialComponents.CardView"
         app:cardCornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,6 +29,7 @@
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navbar"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="3dp"
