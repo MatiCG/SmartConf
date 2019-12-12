@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "smartconf-eip-epitech",
+  "private_key_id": "4f0911968b71231b47798ee5e7dcea6c5a3b53a4",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwGoPS3phzQ63T\nmNKPQOG6X/EQ43gIED72zIJcMG8xlgEKaUkXweG1uqQnbsvYyjhbHC5QSq4a6+ca\nf4pFdQHdjAQfQ8LMZswtRNW/FiFbVvMMOetGc4N+7RHSupYW2VwnaIkirvGwYewY\nlVw7Yq5z/OHp1QUiKgbQORcuH3Pd5w6swWgeXTzK2GKaNRGAIQlOZQpLrIfQ1DGk\nJtRt7m/7mWL3AoUYjqJJzXHpZZ4MszLbCHKO9dHl6PLA5oxO44fVPVDslw+X1IAk\nYpRzQHrr+5R9gFmlM3gzISN7cVGP/lFtNv9rOKMZ0rHgKzhvpcGQxzI8jpYIq1Bg\npcMXdlzfAgMBAAECggEAQYvM7wrNAXH6XBywmoNSwTT+nAOeZJnvZZrfFoMsj+8+\nOerQOth+M07h1I+Hrgwuh7LohhgVz41oelNoWsvfQt/flOd6tOu6KUtKp5IMHlwx\noKZaLOHH2tFQZffu71g91akyCcfFy5nW75uANdZYCnHggFE6VOoBmTT2rMMmNDwx\nHaj2aqGi9r+EeDcqnizKJ3GgSzoSQ6tPxP8ppfFxD+Dhz1207zFqKWSrSO/oaPXm\nyPLQHJUWR7EDEMlBxHWR/P8ZDtga1A/gq0w9Qd4zL8X+n62y6dKTyrkfaP6Vk52o\noHyPPdwMYIN1TUud1ol1dGgNoIoNE2zEf/OY/ropsQKBgQD4IeYgDi7XnUzSdb4I\npLDPxRa/XGgkWjuLHwbfeFLbvDTwEImk6oBYdcnPRJ8DVo/CcJa6KrmFssv1Ky3C\nIjbCeOncDk7fhhJq3H1f791bWUGix7bjb6PEVIbuV8tAxXunY/hxsYJmDNfXeSeh\nIJAbpM5NHLRK8LDyc1vzohbcJwKBgQC1r/R1L0bc5hIH5B1WUNme5z9JsqKAOMaa\nR6Ls5fWCVGHxn1/35jRkLsO/C/gi32E5ijy7OJM050uvPkEyDh711zrYeaU/rGRN\n5gWLWKBkOFJ2DZqrbvZ7fP2yb4QJEJTxkTaUlattJH1xKbmkqB6UTWlIm+pP/WAS\nq+pEIuyUiQKBgAafOPoABuYAL62qMMEgTAuvcdT3jVvzAIXM9Sz/lA6DLlJ9zn6V\nN4mk0xbx+OBo7fs9b/hV7Y+Q3vqTBWyZ5yY3fd4+j4JNnK43Zi0qRJkMf8DtXYci\nUpeJvfQcabM30f38oAPAvf8lNplshU86hD4InuzV6EXbuI0v4PNWjw+fAoGAW+VP\nhCYRdZF49TzQCeSC7fiQ7jnIL4qICWjKY4A8mVsM3yV5aO2q+jEdGPh43UqW5n+h\nECEhc9S5Vz3pw+OYjUf7n5qHlpkfcrcxfrWpCofiTYu7+5H4YaVqvGHjKqKUc0q7\njJPXTTDzsdUk7L+MF/6/jdYuwZ6qhUcnCqePeeECgYEAia8VIw3pC/ZbYmd50SlL\n/PrJJFSj13nufWBITswr3vQoyoJ7IXYvOKSSaDOf71VNswCXjjEQpliYer3dxhP+\ncxLtxFfKdQsNmO4xAEoqV1I2Ixff3IcSr5welWlAhlpd1nmVolaPLR3O8v4lzVZU\n4BSnqalAmCl09So410DPDqk=\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-2fznf@smartconf-eip-epitech.iam.gserviceaccount.com",
+  "client_id": "106426008845556558601",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-2fznf%40smartconf-eip-epitech.iam.gserviceaccount.com"
+}
