@@ -54,7 +54,7 @@ def upload_to_clood(audio_file_name):
     #mp3_to_wav(file_name)
 
     # The name of the audio file to transcribe
-    file_name = 'audio.wav'
+    file_name = audio_file_name
     frame_rate, channels = frame_rate_channel(file_name)
 
     if channels > 1:
@@ -99,7 +99,7 @@ def script_pourri_de_guillaume(file_name):
 
 
 ##if __name__ == "__main__":
-##    upload_to_clood("audio.wav")
-##    tr = script_pourri_de_guillaume("audio.wav")
-##    print(tr)
+  #  #upload_to_clood("audio.wav")
+   # tr = script_pourri_de_guillaume("recording.wav")
+    #print(tr)
 
