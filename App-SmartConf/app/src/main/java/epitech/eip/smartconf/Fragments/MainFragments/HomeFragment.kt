@@ -22,7 +22,11 @@ class HomeFragment: BaseFragment() {
         list.adapter = HomeAdapter(getAct().mUser.getMeetingsId(), this@HomeFragment)
 
         fab.setOnClickListener {
-            placeFragment(FormFragment())
+            placeFragment(FormFragment(),
+                animEnter = R.transition.fade_in,
+                animExit = R.transition.fade_out,
+                backAnimEnter = R.transition.fade_in,
+                backAnimExit = R.transition.fade_out)
         }
     }
 }

@@ -29,6 +29,9 @@ class User {
         return this.meetings
     }
     fun setMeetingsId(meetings_id: MutableList<String>) {
+        if (meetings_id[0] == "Get Started") {
+            meetings_id.removeAt(0)
+        }
         this.meetings = meetings_id
     }
     fun addMeetingsId(meeting_id: String) {
