@@ -77,8 +77,7 @@ class MeetingDescFragment(private var active: Boolean): BaseFragment() {
                 mediaRecorder?.stop()
                 mediaRecorder?.release()
                 state = false
-                cloudStorage.uploadFile(Environment.getExternalStorageDirectory().absolutePath + "/recording.wav",
-                    "https://console.cloud.google.com/storage/browser/wavsoundfilebucket"
+                cloudStorage.uploadFile(output!!,"https://console.cloud.google.com/storage/browser/wavsoundfilebucket"
                 )
                 Toast.makeText(context, "Stop!", Toast.LENGTH_SHORT).show()
             } catch (e: IOException) {
