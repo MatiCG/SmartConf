@@ -6,6 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
@@ -18,7 +22,8 @@ import java.io.IOException
 class MeetingDescFragment(private val meetingsId: String, private var active: Boolean): BaseFragment() {
     private var output: String? = null
     private var mediaRecorder: MediaRecorder? = null
-    private var state: Boolean = false
+    private var IS_RECORDING: Boolean = false
+    private var ref = FirebaseDatabase.getInstance().getReference("meetings").child(meetingsId)
 
     private lateinit var storage: FirebaseStorage
 
@@ -31,8 +36,20 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
         frag_content.addView(loadActive().takeIf { active } ?: loadInactive())
         mAuth = FirebaseAuth.getInstance()
 
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                meeting_title2.text = p0
+                    .child("title")
+                    .value.toString()
+                meeting_desc2.text = p0
+                    .child("subject")
+                    .value.toString()
+            }
+        })
+
         output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
-        //Environment.getExternalStorageDirectory().absolutePath + "/recording.wav"
         mediaRecorder = MediaRecorder()
 
         mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -41,6 +58,7 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
         mediaRecorder?.setAudioEncodingBitRate(16 * 44100)
         mediaRecorder?.setAudioSamplingRate(44100)
         mediaRecorder?.setOutputFile(output)
+
 
         button_start_recording.setOnClickListener {
             startRecording()
@@ -64,7 +82,7 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
         try {
             mediaRecorder?.prepare()
             mediaRecorder?.start()
-            state = true
+            IS_RECORDING = true
         } catch (e: IllegalStateException) {
             e.printStackTrace()
         } catch (e: IOException) {
@@ -73,11 +91,11 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
     }
 
     private fun stopRecording(){
-        if(state){
+        if(IS_RECORDING){
             try {
                 mediaRecorder?.stop()
                 mediaRecorder?.release()
-                state = false
+                IS_RECORDING = false
 
                 storage = FirebaseStorage.getInstance()
                 val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.wav")

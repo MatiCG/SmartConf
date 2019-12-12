@@ -75,6 +75,7 @@ class OptionsLoginFragment: BaseFragment() {
         } else {
             mAuth.fetchSignInMethodsForEmail(input_email.text.toString())
                 .addOnCompleteListener {task ->
+                    email.isEnabled = false
                     showLoader(false)
                     password.visibility = View.VISIBLE
                     if (task.result?.signInMethods?.size == 0) {
@@ -86,17 +87,6 @@ class OptionsLoginFragment: BaseFragment() {
                         password.hint = "Enter your password..."
                         continue_button.text = "login"
                     }
-/*                        if (it.isSuccessful) {
-                            title_card.text = "Login"
-                            password.hint = "Enter your password..."
-                            continue_button.text = "login"
-                        } else {
-                            title_card.text = "Register"
-                            password.hint = "Create your password..."
-                            continue_button.text = "register"
-                        }
-                    }
- */
                 }
         }
     }
@@ -111,13 +101,3 @@ class OptionsLoginFragment: BaseFragment() {
         continue_button.visibility = View.INVISIBLE.takeIf { status } ?: View.VISIBLE
     }
 }
-/*
-        btn_login.setOnClickListener {
-            placeFragment(LoginPageFragment(), R.id.authentification_section)
-        }
-        btn_register.setOnClickListener {
-            placeFragment(RegisterPageFragment(), R.id.authentification_section)
-        }
-    }
-    *.
- */
