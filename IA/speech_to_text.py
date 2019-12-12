@@ -67,26 +67,26 @@ def upload_to_clood(audio_file_name):
     destination_blob_name = audio_file_name
     upload_blob(bucket_name, source_file_name, destination_blob_name)
 
-def google_transcribe(file_name):
-    gcs_uri = 'gs://smartconf-eip-epitech.appspot.com/Meetings/' + file_name
+def google_transcribe(id, file_name):
+    gcs_uri = 'gs://smartconf-eip-epitech.appspot.com/Meetings/Sounds/' + id + "/" +file_name
     transcript = ''
     client = speech.SpeechClient()
     audio = types.RecognitionAudio(uri=gcs_uri)
-    #frame_rate, channels = frame_rate_channel(file_name)
+    #frame_rate, channels = frame_rate_channel(file_name)                                     
 
     config = types.RecognitionConfig(
         encoding=enums.RecognitionConfig.AudioEncoding.LINEAR16,
         sample_rate_hertz=48000,
         language_code='fr-FR')
 
-    # Detects speech in the audio file
+    # Detects speech in the audio file                                                        
     operation = client.long_running_recognize(config, audio)
     response = operation.result(timeout=10000)
 
     for result in response.results:
         transcript += result.alternatives[0].transcript
 
-    #delete_blob(bucketname, file_name)
+    #delete_blob(bucketname, file_name)                                                       
 
     return transcript
 
@@ -95,12 +95,9 @@ def write_transcripts(transcript_filename, transcript):
     f.write(transcript)
     f.close()
 
-def script_pourri_de_guillaume(file_name):
-    cred = credentials.Certificate("./fire.json")
-    firebase_admin.initialize_app(cred)
-    transcript = google_transcribe(file_name)
+def script_pourri_de_guillaume(id, file_name):
+    transcript = google_transcribe(id, file_name)
     return transcript
-
 
 #if __name__ == "__main__":
   #  #upload_to_clood("audio.wav")

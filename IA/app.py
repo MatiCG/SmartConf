@@ -18,7 +18,7 @@ class Synthesis():
 
 @app.route('/<reunion_id>/<filename>', methods=['POST', 'GET'])
 def test(reunion_id, filename):
-    text = script_pourri_de_guillaume(filename)
+    text = script_pourri_de_guillaume(reunion_id, filename)
     synth = Synthesis(reunion_id, text)
     synth.add_synth()
     return (synth.text_id)
