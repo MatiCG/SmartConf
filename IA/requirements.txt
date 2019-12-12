@@ -9,3 +9,7 @@ sseclient
 gcloud
 #pyasn1
 requests-toolbelt
+google-cloud-storage
+google-cloud-speech
+pydub
+protobuf

@@ -22,10 +22,11 @@ class Synthesis():
 
 @app.route('/<reunion_id>/<filename>', methods=['POST', 'GET'])
 def test(reunion_id, filename):
-    synth = Synthesis(reunion_id, filename)
+    text = script_pourri_de_guillaume(filename)
+    synth = Synthesis(reunion_id, text)
     synth.add_synth()
     return (synth.text_id)
 
 
 if __name__ == "__main__":
-    app.run(port=5000, debug=True, threaded=True)
+    app.run(port=6000, debug=True, threaded=True)
