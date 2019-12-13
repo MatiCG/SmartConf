@@ -25,6 +25,19 @@
             android:layout_marginEnd="15dp"
             android:hint="Enregristrer" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="10dp"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:background="#921414"
+            android:hint="Déconnexion" />
+
         <ImageButton
             android:id="@+id/user_profile_photo"
             android:layout_width="120dp"
@@ -142,21 +155,5 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:layout_width="120dp"
-            android:layout_height="45dp"
-            android:layout_below="@+id/information_bar"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="145dp"
-            android:layout_marginTop="36dp"
-            android:layout_marginEnd="145dp"
-            android:layout_marginBottom="91dp"
-            android:background="#921414"
-            android:hint="Déconnexion"
-            android:textSize="16sp"
-            android:textStyle="normal|bold" />
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

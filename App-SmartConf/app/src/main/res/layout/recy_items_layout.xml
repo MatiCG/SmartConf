@@ -5,6 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="200dp"
+    android:elevation="2dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
     android:layout_marginStart="16dp"
@@ -19,17 +20,19 @@
             android:id="@+id/meeting_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="This is the title"
+            android:text="SmartConf meeting"
+            android:fontFamily="@font/opensans_regular"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:textSize="30sp"
+            android:textSize="24sp"
             android:layout_margin="4dp"/>
 
         <TextView
             android:id="@+id/meeting_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="starting today"
+            android:text="starting in 3 days"
+            android:fontFamily="@font/opensans_regular"
             app:layout_constraintStart_toStartOf="@id/meeting_title"
             app:layout_constraintTop_toBottomOf="@id/meeting_title" />
 
@@ -40,6 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:padding="16dp"
+            android:fontFamily="@font/opensans_regular"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean fringilla nibh quis dolor tempus aliquam. Phasellus vel convallis lacus."
             app:layout_constraintTop_toBottomOf="@id/meeting_status"
             app:layout_constraintBottom_toTopOf="@id/imagebtn"
