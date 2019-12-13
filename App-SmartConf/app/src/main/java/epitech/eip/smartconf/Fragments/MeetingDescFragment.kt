@@ -4,16 +4,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.app.Activity
-import android.content.Intent
-import android.speech.RecognizerIntent
 import android.text.TextUtils
-import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -94,41 +87,5 @@ class MeetingDescFragment(private val meetingID: String): BaseFragment() {
     private fun loadActive(): View{
         val view: View = LayoutInflater.from(context).inflate(R.layout.fragelem_synthese_layout, frag_content, false)
         return view
-    }
-
-    private fun startRecording() {
-        try {
-            mediaRecorder?.prepare()
-            mediaRecorder?.start()
-            IS_RECORDING = true
-        } catch (e: IllegalStateException) {
-            e.printStackTrace()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        }
-    }
-
-    private fun stopRecording(){
-        if(IS_RECORDING){
-            try {
-                mediaRecorder?.stop()
-                mediaRecorder?.release()
-                IS_RECORDING = false
-
-                storage = FirebaseStorage.getInstance()
-                val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.wav")
-
-                val stream = FileInputStream(File(output))
-
-                storageRef.putStream(stream)
-            } catch (e: IOException) { }
-        } else{
-            Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    fun createToken(): String {
-        val chars = ('0'..'9').toList().toTypedArray() + ('a'..'z').toList().toTypedArray()
-        return (1..32).map { chars.random() }.joinToString { "" }
     }
 }
