@@ -1,21 +1,28 @@
 package epitech.eip.smartconf.Fragments
 
 import android.media.MediaRecorder
+import android.net.Uri
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageMetadata
+import epitech.eip.smartconf.ApiRequests.Requests
+import epitech.eip.smartconf.ApiRequests.UrlRequests
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.frag_meetingdesc_layout.*
 import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
+import org.json.JSONArray
+import org.json.JSONObject
+import tekproject.dev_epicture.epicture.Interface.VolleyCallback
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
@@ -49,15 +56,17 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
                 }
             })
 
-            output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
+            output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.mp3"
             mediaRecorder = MediaRecorder()
-
+            Toast.makeText(context, output, Toast.LENGTH_LONG).show()
             mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            mediaRecorder?.setAudioEncodingBitRate(16 * 44100)
-            mediaRecorder?.setAudioSamplingRate(44100)
+            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
+            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+            mediaRecorder?.setAudioEncodingBitRate(96200)
+            mediaRecorder?.setAudioSamplingRate(128000)
             mediaRecorder?.setOutputFile(output)
+
+
 
 
             button_start_recording.setOnClickListener {
@@ -67,6 +76,22 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
             button_stop_recording.setOnClickListener {
                 Snackbar.make(view, "Stop recording...", Snackbar.LENGTH_SHORT).show()
                 stopRecording()
+                Handler().postDelayed({
+                    Toast.makeText(context, "REQUEST...", Toast.LENGTH_SHORT).show()
+                    Requests().makeGetRequest(object : VolleyCallback {
+                        override fun onSuccessResponse(result: JSONArray) {
+                            Toast.makeText(context, "RESULT = " + result.toString(), Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onSuccessResponse(result: JSONObject) {
+                            Toast.makeText(context, "RESULT = " + result.toString(), Toast.LENGTH_SHORT).show()
+                        }
+
+                        override fun onFailedResponse() {
+                            Toast.makeText(context, "ERROR", Toast.LENGTH_SHORT).show()
+                        }
+                    }, UrlRequests().adefinir(meetingsId), context!!)
+                }, 500)
             }
         }
     }
@@ -101,11 +126,20 @@ class MeetingDescFragment(private val meetingsId: String, private var active: Bo
                 IS_RECORDING = false
 
                 storage = FirebaseStorage.getInstance()
-                val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.wav")
+                val storageRef = storage.reference.child("Meetings/Sounds/${meetingsId}/" + "recording.mp3")
+                val uri = Uri.fromFile(File(output)) //!!.replace("recording.wav", "recordingtest.wav")))
 
-                val stream = FileInputStream(File(output))
+                val test = StorageMetadata.Builder()
+                    .setContentType("audio/mp3")
+                    .build()
 
-                storageRef.putStream(stream)
+                storageRef.putFile(uri, test)
+                    .addOnCompleteListener {
+                        Toast.makeText(context, "ON SUCCESS", Toast.LENGTH_LONG).show()
+                    }
+//                val stream = FileInputStream(File(output))
+
+  //              storageRef.putStream(stream)
             } catch (e: IOException) { }
         } else{
             Toast.makeText(context, "You are not recording right now!", Toast.LENGTH_SHORT).show()

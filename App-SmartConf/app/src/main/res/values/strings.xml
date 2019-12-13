@@ -6,4 +6,11 @@
     <string name="toast_notcongifured">Not configured !</string>
     <string name="btn_login">login</string>
     <string name="btn_register">register</string>
+
+    <!-- Request values -->
+    <string name="header_clientId_value">Client-ID 810cbe1b4dc6b81</string>
+    <string name="header_bearer_value">Bearer d87f8c796e47682322b39145c509a0d2c207a4d5</string>
+    <string name="headerAuth">Authorization</string>
+    <string name="auth_url"><![CDATA[https://api.imgur.com/oauth2/authorize?client_id=810cbe1b4dc6b81&response_type=token&state=stable]]></string>
+
 </resources>
