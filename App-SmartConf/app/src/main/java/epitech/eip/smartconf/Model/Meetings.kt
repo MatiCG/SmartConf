@@ -6,11 +6,13 @@ class Meetings {
     private lateinit var leader_token: String
     private lateinit var meeting_title: String
     private lateinit var meeting_subject: String
+    private var meeting_active: Boolean = false
 
     constructor(pLeaderToken: String, pMeetingTitle: String, pMeetingSubject: String) {
         this.leader_token = pLeaderToken
         this.meeting_title = pMeetingTitle
         this.meeting_subject = pMeetingSubject
+        this.meeting_active = false
     }
 
     constructor() {}

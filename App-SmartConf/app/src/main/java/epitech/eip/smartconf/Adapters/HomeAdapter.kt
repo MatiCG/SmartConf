@@ -46,7 +46,7 @@ class HomeAdapter(private var titles: List<String>, private var fragment: BaseFr
             }
         })
         holder.itemView.setOnClickListener {
-            fragment.placeFragment(MeetingDescFragment(false.takeIf { position == 0 || position == 2} ?: true),
+            fragment.placeFragment(MeetingDescFragment(titles[position]),
                 R.id.root_frag_view,
                 R.transition.slide_in_left,
                 R.transition.slide_out_left,
