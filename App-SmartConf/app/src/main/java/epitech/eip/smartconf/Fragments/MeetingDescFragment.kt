@@ -1,74 +1,89 @@
 package epitech.eip.smartconf.Fragments
 
-import android.media.MediaRecorder
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.app.Activity
+import android.content.Intent
+import android.speech.RecognizerIntent
+import android.text.TextUtils
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import com.google.firebase.storage.FirebaseStorage
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.R
+import epitech.eip.smartconf.SpeechToText.SpeechRecognizerViewModel
 import kotlinx.android.synthetic.main.frag_meetingdesc_layout.*
 import kotlinx.android.synthetic.main.fragelem_readytostart_layout.*
-import java.io.File
-import java.io.FileInputStream
-import java.io.IOException
+import tekproject.dev_epicture.epicture.ApiRequests.Requests
+import tekproject.dev_epicture.epicture.ApiRequests.UrlRequests
 
-class MeetingDescFragment(private val meetingsId: String, private var active: Boolean): BaseFragment() {
-    private var output: String? = null
-    private var mediaRecorder: MediaRecorder? = null
-    private var IS_RECORDING: Boolean = false
-    private var ref = FirebaseDatabase.getInstance().getReference("meetings").child(meetingsId)
-
-    private lateinit var storage: FirebaseStorage
-
+class MeetingDescFragment(private val meetingID: String): BaseFragment() {
     override fun getLayout(): Int { return R.layout.frag_meetingdesc_layout }
     override fun setCustomActionBar(): Int { return R.layout.actionbar_return_layout }
+
+    private lateinit var speechRecognizerViewModel: SpeechRecognizerViewModel
+    var ref = FirebaseDatabase.getInstance().getReference("meetings")
+    private var active = false
+    private var test: String? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        frag_content.addView(loadActive().takeIf { active } ?: loadInactive())
-        if (!active) {
-            ref.addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {}
+        frag_content.addView(loadInactive())
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    meeting_title2.text = p0
-                        .child("title")
-                        .value.toString()
-                    meeting_desc2.text = p0
-                        .child("subject")
-                        .value.toString()
-                }
-            })
-
-            output = context?.getExternalFilesDir(null)?.absolutePath + "/recording.wav"
-            mediaRecorder = MediaRecorder()
-
-            mediaRecorder?.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mediaRecorder?.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-            mediaRecorder?.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            mediaRecorder?.setAudioEncodingBitRate(16 * 44100)
-            mediaRecorder?.setAudioSamplingRate(44100)
-            mediaRecorder?.setOutputFile(output)
-
-
-            button_start_recording.setOnClickListener {
-                Snackbar.make(view, "Recording...", Snackbar.LENGTH_SHORT).show()
-                startRecording()
+            @SuppressLint("SetTextI18n")
+            override fun onDataChange(p0: DataSnapshot) {
+                result?.text = "MEETING RESULT = " + p0
+                    .child(meetingID)
+                    .child("speech")
+                    .value.toString()
             }
-            button_stop_recording.setOnClickListener {
-                Snackbar.make(view, "Stop recording...", Snackbar.LENGTH_SHORT).show()
-                stopRecording()
+        })
+        button_start_recording?.setOnClickListener {
+            if (speechRecognizerViewModel.isListening) {
+                speechRecognizerViewModel.stopListening()
+            } else {
+                speechRecognizerViewModel.startListening()
             }
         }
+        setupSpeechViewModel()
+    }
+
+    private fun setupSpeechViewModel() {
+        speechRecognizerViewModel = ViewModelProviders.of(this).get(SpeechRecognizerViewModel::class.java)
+        speechRecognizerViewModel.getViewState().observe(this, Observer<SpeechRecognizerViewModel.ViewState> { viewState ->
+            render(viewState)
+        })
+    }
+
+    private fun render(uiOutput: SpeechRecognizerViewModel.ViewState?) {
+        if (uiOutput == null) return
+
+        textTV?.text = uiOutput.spokenText
+
+        button_start_recording?.background  = if (uiOutput.isListening) {
+            context!!.resources.getDrawable(R.drawable.ic_mic_off, null)
+        } else {
+            if (!TextUtils.isEmpty(uiOutput.spokenText)) {
+                saveData(uiOutput.spokenText)
+            }
+            context!!.resources.getDrawable(R.drawable.ic_mic, null)
+        }
+    }
+
+    private fun saveData(spokenText: String) {
+        Requests().makePostRequest(UrlRequests().adefinir(meetingID, spokenText), context!!)
     }
 
     private fun loadInactive(): View{
