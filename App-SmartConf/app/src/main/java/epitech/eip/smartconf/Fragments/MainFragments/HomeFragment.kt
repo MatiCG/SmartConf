@@ -7,6 +7,7 @@ import epitech.eip.smartconf.Adapters.HomeAdapter
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.Fragments.Form.FormFragment
 import epitech.eip.smartconf.R
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.frag_home_layout.*
 
 class HomeFragment: BaseFragment() {
@@ -14,6 +15,18 @@ class HomeFragment: BaseFragment() {
     override fun shouldUseCustomBack(): Boolean { return true }
     override fun shouldShowNavBar(): Boolean { return true }
     override fun setPageTitle(): String { return "Home" }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (getAct().mUser.getMeetingsId().size <= 0) {
+            anim_empty.playAnimation()
+            anim_empty.visibility = View.VISIBLE
+        } else {
+            anim_empty.cancelAnimation()
+            anim_empty.visibility = View.INVISIBLE
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

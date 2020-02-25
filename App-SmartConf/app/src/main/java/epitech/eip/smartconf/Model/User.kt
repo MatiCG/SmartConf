@@ -8,7 +8,7 @@ class User {
     constructor(pToken: String, pEmail: String) {
         this.token = pToken
         this.email = pEmail
-        this.meetings = mutableListOf("Get Started")
+        this.meetings = mutableListOf()
     }
 
     fun getToken(): String {

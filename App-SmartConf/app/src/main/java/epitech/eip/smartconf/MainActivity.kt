@@ -23,16 +23,12 @@ import kotlinx.android.synthetic.main.frag_home_layout.*
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var fragment: BaseFragment
-    private lateinit var mAuth: FirebaseAuth
-    private var USER_CONNECTED: Boolean = false
-    lateinit var mUser: User
     private var ref = FirebaseDatabase.getInstance().getReference("users")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mAuth = FirebaseAuth.getInstance()
         ref.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {}
 
@@ -55,10 +51,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     }
 
     private fun authHandle() {
-        val user = mAuth.currentUser
-        USER_CONNECTED = true.takeIf { user != null } ?: false
-
-        if (!USER_CONNECTED) {
+        if (mAuth.currentUser == null) {
             setRootFragment(MainAuthFragment())
         } else {
             navbar.setOnNavigationItemSelectedListener(this)

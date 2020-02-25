@@ -21,7 +21,6 @@ class HomeAdapter(private var titles: List<String>, private var fragment: BaseFr
         return HomeViewHolder(view)
     }
 
-
     override fun getItemCount(): Int {
         return titles.size
     }
@@ -41,7 +40,7 @@ class HomeAdapter(private var titles: List<String>, private var fragment: BaseFr
                     .value.toString()
                 holder.meeting_status.text = p0
                     .child(titles[position])
-                    .child("token")
+                    .child("date")
                     .value.toString()
             }
         })

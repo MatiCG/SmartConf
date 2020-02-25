@@ -19,11 +19,12 @@ class Requests {
         try {
             val request = object : JsonObjectRequest(POST, url, null,
                 Response.Listener { response ->
-                    Log.d("laissemoitranquil", response.toString())
+//                    callback.onSuccessResponse(response)
+//                    Log.d("laissemoitranquil", response.toString())
                     //Toast.makeText(context, "SUCCESS", Toast.LENGTH_SHORT).show()
                 },
                 Response.ErrorListener {
-                    //Toast.makeText(context, "ERROR = " + it.message, Toast.LENGTH_SHORT).show()
+  //                  callback.onFailedResponse()
                 }) {
             }
             queue.add(request)

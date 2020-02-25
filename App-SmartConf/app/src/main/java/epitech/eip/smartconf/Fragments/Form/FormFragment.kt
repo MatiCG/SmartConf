@@ -1,10 +1,10 @@
 package epitech.eip.smartconf.Fragments.Form
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
+import com.codetroopers.betterpickers.datepicker.DatePickerBuilder
 import com.google.firebase.database.FirebaseDatabase
 import epitech.eip.smartconf.BaseClass.BaseFragment
 import epitech.eip.smartconf.Fragments.MainFragments.HomeFragment
@@ -12,6 +12,7 @@ import epitech.eip.smartconf.Model.Meetings
 import epitech.eip.smartconf.R
 import kotlinx.android.synthetic.main.form_meetingabout_layout.*
 import kotlinx.android.synthetic.main.form_meetingbasicdata_layout.*
+import kotlinx.android.synthetic.main.form_meetingbasicdata_layout.view.*
 import kotlinx.android.synthetic.main.frag_formhandling_layout.*
 
 class FormFragment: BaseFragment() {
@@ -47,7 +48,16 @@ class FormFragment: BaseFragment() {
                 setRootFragment(HomeFragment())
             } else {
                 form_title.text = formTitles[STEP]
-                form_container.addView(LayoutInflater.from(context).inflate(formLayout[STEP], form_container, false))
+                val view = LayoutInflater.from(context).inflate(formLayout[STEP], form_container, false)
+                /*view.calendar?.setOnClickListener {
+                    Toast.makeText(context, "NTM", Toast.LENGTH_LONG).show()
+                    val dpb = DatePickerBuilder()
+                        .setFragmentManager(getAct().supportFragmentManager)
+                        .setStyleResId(R.style.BetterPickersDialogFragment)
+                        .setYearOptional(true)
+                    dpb.show()
+                }*/
+                form_container.addView(view)
             }
         }
     }

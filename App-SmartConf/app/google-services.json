@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "175786844368",
+    "firebase_url": "https://smartconf-eip-epitech.firebaseio.com",
+    "project_id": "smartconf-eip-epitech",
+    "storage_bucket": "smartconf-eip-epitech.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:175786844368:android:a45ba97e5ddef614473ed5",
+        "android_client_info": {
+          "package_name": "epitech.eip.smartconf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "175786844368-9lp1v3pcgge947864sv16qq20eogsdn6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "epitech.eip.smartconf",
+            "certificate_hash": "c25829870cf2444934140a0eb2b8fac8a1321cc0"
+          }
+        },
+        {
+          "client_id": "175786844368-fs6n9lm582ihm2d3h84u3tphgmdej3rb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHVbXAw4cF-_5WX5G3Q4NJcAal7PtNl3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "175786844368-fs6n9lm582ihm2d3h84u3tphgmdej3rb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
