@@ -1,0 +1,14 @@
+version: '3.4'
+services:
+  ia:
+    build:
+      context: ./IA
+      dockerfile: Dockerfile
+    ports:
+      - 5000:80
+    networks:
+      - ia-tier
+    restart: always
+
+networks:
+  ia-tier:
